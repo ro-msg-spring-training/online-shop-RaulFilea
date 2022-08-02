@@ -1,4 +1,4 @@
-package ro.msg.learning.shop;
+package ro.msg.learning.shop.populator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -11,7 +11,6 @@ import ro.msg.learning.shop.mappers.ProductMapper;
 import ro.msg.learning.shop.services.ProductCategoryService;
 import ro.msg.learning.shop.services.ProductService;
 import ro.msg.learning.shop.services.SupplierService;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +36,7 @@ public class ProductController {
         Optional<ProductCategory> productCategoryOptional = productCategoryService.findProductCategoryById(Long.valueOf(productSaveDTO.getProductCategoryId()));
         Optional<Supplier> supplierOptional = supplierService.findSupplierById(Long.valueOf(productSaveDTO.getSupplierId()));
 
-        if(productCategoryOptional.isPresent() && supplierOptional.isPresent()) {
+        if (productCategoryOptional.isPresent() && supplierOptional.isPresent()) {
             ProductCategory productCategory = productCategoryOptional.get();
             Supplier supplier = supplierOptional.get();
             productService.saveProduct(productMapper.toProduct(productSaveDTO, productCategory, supplier));
@@ -50,16 +49,16 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public ProductDTO findProductById (@PathVariable Long id) {
+    public ProductDTO findProductById(@PathVariable Long id) {
         return productService.findProductById(id).map(productMapper::toDto).orElseThrow();
     }
 
     @PutMapping("/products/{id}")
-    public void updateProduct (@PathVariable Long id, @RequestBody ProductSaveDTO productSaveDTO) {
+    public void updateProduct(@PathVariable Long id, @RequestBody ProductSaveDTO productSaveDTO) {
         Optional<ProductCategory> productCategoryOptional = productCategoryService.findProductCategoryById(Long.valueOf(productSaveDTO.getProductCategoryId()));
         Optional<Supplier> supplierOptional = supplierService.findSupplierById(Long.valueOf(productSaveDTO.getSupplierId()));
 
-        if(productCategoryOptional.isPresent() && supplierOptional.isPresent()) {
+        if (productCategoryOptional.isPresent() && supplierOptional.isPresent()) {
             ProductCategory productCategory = productCategoryOptional.get();
             Supplier supplier = supplierOptional.get();
 

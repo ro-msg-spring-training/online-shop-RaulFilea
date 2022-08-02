@@ -18,12 +18,8 @@ l
 <src/test/java/ro/msg/learning/shop/ShopApplicationTests.java,8\e\8e6a35126872508f0892751c372b8ba90e794faa
 f
 6src/main/java/ro/msg/learning/shop/entities/Stock.java,4\3\43d9a38ae74e2bbda3dd35c89230206a92ffd3bd
-n
->src/main/java/ro/msg/learning/shop/entities/OrderDetailId.java,5\4\54966340926a76a4b21b5987ce437235084e699b
 l
 <src/main/java/ro/msg/learning/shop/entities/OrderDetail.java,f\1\f1046cdeb0574cd4c6fb9e9be2a6c638437ac920
-h
-8src/main/java/ro/msg/learning/shop/entities/StockId.java,9\c\9c1d967097358bddd507f731f821210915dbb07e
 k
 ;src/main/java/ro/msg/learning/shop/entities/BaseEntity.java,c\f\cf865a033957a077b174de6e139b375ffcb37a79
 i
@@ -56,8 +52,6 @@ h
 8src/main/java/ro/msg/learning/shop/entities/Product.java,1\9\196098d257f17a45a82fffe8a07f1fad4ac15517
 p
 @src/main/java/ro/msg/learning/shop/entities/ProductCategory.java,3\8\380b116fe674f505d1222d285e118bc9c79e8714
-{
-Ksrc/main/java/ro/msg/learning/shop/assemblers/ProductCategoryAssembler.java,9\c\9c3198a944149eddc4c0aab57cbf8f4c3b965446
 n
 >src/main/java/ro/msg/learning/shop/dto/ProductCategoryDTO.java,9\8\982e344dab760d1c0ecceadaa233669bcb2c8985
 u
@@ -68,8 +62,6 @@ Psrc/main/java/ro/msg/learning/shop/exceptions/ProductCategoryNotFoundAdvice.jav
 Ssrc/main/java/ro/msg/learning/shop/exceptions/ProductCategoryNotFoundException.java,1\3\1357bca96475c8d6b2c28891b44d82fcc4002486
 ~
 Nsrc/main/java/ro/msg/learning/shop/repositories/ProductCategoryRepository.java,9\9\991a9422d5413d00b997da940894c59f9df1d6c4
-u
-Esrc/main/java/ro/msg/learning/shop/controllers/ProductController.java,8\4\840e6ab0e940daff541b28b71f25e67e176129ca
 f
 6src/main/java/ro/msg/learning/shop/dto/ProductDTO.java,2\c\2c07cabd390c45e38b07badd63d34dd5fca3a4fd
 m
