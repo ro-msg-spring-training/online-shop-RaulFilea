@@ -2,6 +2,7 @@ package ro.msg.learning.shop.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ro.msg.learning.shop.entities.ProductCategory;
 import ro.msg.learning.shop.entities.Supplier;
 import ro.msg.learning.shop.exceptions.ProductCategoryNotFoundException;
 import ro.msg.learning.shop.exceptions.SupplierNotFoundException;
@@ -33,6 +34,14 @@ public class SupplierService {
             supplierRepository.deleteById(supplierID);
         } else {
             throw (new ProductCategoryNotFoundException(supplierID));
+        }
+    }
+
+    public void updateSupplier(final Supplier supplier) {
+        if (supplierRepository.existsById(supplier.getId())) {
+            supplierRepository.save(supplier);
+        } else {
+            throw (new ProductCategoryNotFoundException(supplier.getId()));
         }
     }
 }

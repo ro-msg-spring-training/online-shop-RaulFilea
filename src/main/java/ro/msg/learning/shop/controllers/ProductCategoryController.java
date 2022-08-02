@@ -2,11 +2,9 @@ package ro.msg.learning.shop.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ro.msg.learning.shop.assemblers.ProductCategoryAssembler;
 import ro.msg.learning.shop.dto.ProductCategoryDTO;
 import ro.msg.learning.shop.entities.ProductCategory;
 import ro.msg.learning.shop.mappers.ProductCategoryMapper;
-import ro.msg.learning.shop.repositories.ProductCategoryRepository;
 import ro.msg.learning.shop.services.ProductCategoryService;
 
 import java.util.List;
@@ -14,9 +12,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ProductCategoryController {
-
-    private final ProductCategoryRepository repository;
-    private final ProductCategoryAssembler assembler;
 
     private final ProductCategoryService productCategoryService;
     private final ProductCategoryMapper productCategoryMapper;
