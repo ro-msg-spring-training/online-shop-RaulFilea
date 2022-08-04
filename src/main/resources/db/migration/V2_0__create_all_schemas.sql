@@ -27,11 +27,11 @@ CREATE TABLE IF NOT EXISTS `customer` (
 CREATE TABLE IF NOT EXISTS `location` (
 
     `id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(20) NOT NULL,
-    `country` VARCHAR(20) NOT NULL,
-    `city` VARCHAR(30) NOT NULL,
-    `county` VARCHAR(30) NOT NULL,
-    `street` VARCHAR(50) NOT NULL
+    `name` VARCHAR(220) NOT NULL,
+    `address_country` VARCHAR(220) NOT NULL,
+    `address_city` VARCHAR(230) NOT NULL,
+    `address_county` VARCHAR(230) NOT NULL,
+    `address_street` VARCHAR(250) NOT NULL
 
 );
 
@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `product` (
     `description` VARCHAR(150) NOT NULL,
     `price` FLOAT NOT NULL,
     `weight` FLOAT NOT NULL,
-    `category_id` INTEGER NOT NULL,
-    `supplier_id` INTEGER NOT NULL,
-    `imageurl` VARCHAR(150) NOT NULL
+    `category_id` INTEGER,
+    `supplier_id` INTEGER,
+    `imageurl` VARCHAR(150)
 
 );
 

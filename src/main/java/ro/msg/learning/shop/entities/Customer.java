@@ -1,12 +1,13 @@
 package ro.msg.learning.shop.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 
 @Entity @Data
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class Customer extends BaseEntity<Long> {
     private String fname;
     private String lname;
