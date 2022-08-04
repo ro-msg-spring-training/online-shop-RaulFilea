@@ -2,8 +2,10 @@ package ro.msg.learning.shop.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ro.msg.learning.shop.dto.ProductCategoryDTO;
 import ro.msg.learning.shop.entities.ProductCategory;
 import ro.msg.learning.shop.exceptions.ProductCategoryNotFoundException;
+import ro.msg.learning.shop.mappers.ProductCategoryMapper;
 import ro.msg.learning.shop.repositories.ProductCategoryRepository;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductCategoryService {
     private final ProductCategoryRepository productCategoryRepository;
+    private final ProductCategoryMapper productCategoryMapper;
 
     public void saveProductCategory(ProductCategory productCategory) {
         productCategoryRepository.save(productCategory);
@@ -35,7 +38,9 @@ public class ProductCategoryService {
         }
     }
 
-    public void updateProductCategory(final ProductCategory productCategory) {
+    public void updateProductCategory(Long id, final ProductCategoryDTO productCategoryDTO) {
+        final ProductCategory productCategory = productCategoryMapper.toProductCategory(productCategoryDTO);
+        productCategory.setId(id);
         if (productCategoryRepository.existsById(productCategory.getId())) {
             productCategoryRepository.save(productCategory);
         } else {

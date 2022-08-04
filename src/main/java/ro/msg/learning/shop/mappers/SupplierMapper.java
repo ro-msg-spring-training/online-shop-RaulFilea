@@ -9,9 +9,10 @@ import ro.msg.learning.shop.entities.Supplier;
 @RequiredArgsConstructor
 public class SupplierMapper {
     public SupplierDTO toDto(Supplier supplier) {
-        Long id = supplier.getId();
-        String name = supplier.getName();
-        return new SupplierDTO(Math.toIntExact(id), name);
+        return new SupplierDTO(
+                Math.toIntExact(supplier.getId()),
+                supplier.getName()
+        );
     }
 
     public Supplier toSupplier(SupplierDTO supplierDto) {

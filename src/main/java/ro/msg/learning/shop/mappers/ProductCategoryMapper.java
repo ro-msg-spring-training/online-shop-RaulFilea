@@ -9,13 +9,17 @@ import ro.msg.learning.shop.entities.ProductCategory;
 @RequiredArgsConstructor
 public class ProductCategoryMapper {
     public ProductCategoryDTO toDto(ProductCategory productCategory) {
-        Long id = productCategory.getId();
-        String name = productCategory.getName();
-        String description = productCategory.getDescription();
-        return new ProductCategoryDTO(id, name, description);
+        return new ProductCategoryDTO(
+                productCategory.getId(),
+                productCategory.getName(),
+                productCategory.getDescription()
+        );
     }
 
     public ProductCategory toProductCategory(ProductCategoryDTO productCategoryDto) {
-        return new ProductCategory(productCategoryDto.getName(), productCategoryDto.getDescription());
+        return new ProductCategory(
+                productCategoryDto.getName(),
+                productCategoryDto.getDescription()
+        );
     }
 }

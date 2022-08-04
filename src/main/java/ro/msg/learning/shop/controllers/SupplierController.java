@@ -11,18 +11,19 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/suppliers")
 public class SupplierController {
 
     private final SupplierService supplierService;
 
     private final SupplierMapper supplierMapper;
 
-    @GetMapping("/suppliers")
+    @GetMapping
     public List<SupplierDTO> findAllSuppliers() {
         return this.supplierService.findAllSuppliers().stream().map(supplierMapper::toDto).toList();
     }
 
-    @PostMapping("/suppliers")
+    @PostMapping
     public void saveNewSupplier(@RequestBody SupplierDTO supplierDTO) {
         this.supplierService.saveSupplier(supplierMapper.toSupplier(supplierDTO));
     }
