@@ -3,15 +3,13 @@ package ro.msg.learning.shop.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ro.msg.learning.shop.dto.OrderDTO;
 import ro.msg.learning.shop.dto.StockDTO;
 import ro.msg.learning.shop.entities.Location;
-import ro.msg.learning.shop.entities.Order;
+import ro.msg.learning.shop.entities.Orders;
 import ro.msg.learning.shop.mappers.OrderMapper;
+import ro.msg.learning.shop.services.OrderServiceImplemented;
 import ro.msg.learning.shop.services.strategy.OrderStrategy;
 
 import java.util.List;
@@ -21,8 +19,13 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private final ro.msg.learning.shop.services.OrderServiceImplemented orderService;
+    private final OrderServiceImplemented orderService;
     private final OrderMapper orderMapper;
+
+    @GetMapping
+    public List<OrderDTO> findAllSuppliers() {
+        return this.orderService.findAllOrders().stream().map(orderMapper::toDTO).toList();
+    }
 
     @PostMapping
     public ResponseEntity<OrderDTO> placeOrder(@RequestBody OrderDTO orderInfo) {
@@ -30,15 +33,15 @@ public class OrderController {
         List<StockDTO> finalProducts = strategy.run(orderInfo);
 
         // create and save new order entity
-        Order order = orderMapper.toEntity(orderInfo);
+        Orders orders = orderMapper.toEntity(orderInfo);
         Location primaryLocation = this.orderService.getPrimaryLocation(finalProducts);
-        order.setShippedFrom(primaryLocation);
+        orders.setShippedFrom(primaryLocation);
 
         // process order
-        Order newOrder = this.orderService.placeOrder(order, finalProducts);
+        Orders newOrders = this.orderService.placeOrder(orders, finalProducts);
 
         // prepare order dto for return
-        OrderDTO orderDto = orderMapper.toDTO(newOrder);
+        OrderDTO orderDto = orderMapper.toDTO(newOrders);
         orderDto.setProducts(finalProducts);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(orderDto);

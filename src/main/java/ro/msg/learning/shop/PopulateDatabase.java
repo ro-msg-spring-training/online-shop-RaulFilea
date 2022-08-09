@@ -9,6 +9,9 @@ import ro.msg.learning.shop.entities.*;
 import ro.msg.learning.shop.repositories.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Configuration
 public class PopulateDatabase {
@@ -17,7 +20,7 @@ public class PopulateDatabase {
     private final String string = "Preloaded %s";
 
     @Bean
-    CommandLineRunner initDatabase(LocationRepository locationRepository, ProductCategoryRepository productCategoryRepository, SupplierRepository supplierRepository, ProductRepository productRepository, StockRepository stockRepository) {
+    CommandLineRunner initDatabase(OrderDetailRepository orderDetailRepository, OrderRepository orderRepository, LocationRepository locationRepository, ProductCategoryRepository productCategoryRepository, SupplierRepository supplierRepository, ProductRepository productRepository, StockRepository stockRepository) {
         return args -> {
             ProductCategory pc1 =  new ProductCategory("Laptops", "Laptops, Notebooks, 2in1s");
             ProductCategory pc2 =  new ProductCategory("TV", "TVs, SmartTV, Monitors");
@@ -32,8 +35,8 @@ public class PopulateDatabase {
             supplierRepository.save(s2);
             supplierRepository.findAll().forEach(supplier -> log.info(String.format(string, supplier)));
 
-            Product p1 = new Product("Lenovo Y700", "Best price/quality rate", BigDecimal.valueOf(1000), 3.0, null, null, null);
-            Product p2 = new Product("LG TV 9", "Better than the others", BigDecimal.valueOf(700), 10.2, null, null, null);
+            Product p1 = new Product("Lenovo Y700", "Best price/quality rate", BigDecimal.valueOf(1000), 3.0, pc1, s1, null);
+            Product p2 = new Product("LG TV 9", "Better than the others", BigDecimal.valueOf(700), 10.2, pc2, s2, null);
             productRepository.save(p1);
             productRepository.save(p2);
             productRepository.findAll().forEach(product -> log.info(String.format(string, product)));
@@ -51,6 +54,16 @@ public class PopulateDatabase {
             stockRepository.save(st2);
             stockRepository.save(st3);
             stockRepository.findAll().forEach(stock -> log.info(String.format(string, stock)));
+
+
+            Orders o1 = new Orders(l1, null, LocalDateTime.now(), "Romania", "Cluj-Napoca", "Cluj", "Str. Garii 25");
+            orderRepository.save(o1);
+            orderRepository.findAll().forEach(order -> log.info(String.format(string, order)));
+
+
+            OrderDetail od1 = new OrderDetail(new OrderDetail.OrderDetailId(o1, p1), 2);
+            orderDetailRepository.save(od1);
+            orderDetailRepository.findAll().forEach(orderDetail -> log.info(String.format(string, orderDetail)));
         };
     }
 }

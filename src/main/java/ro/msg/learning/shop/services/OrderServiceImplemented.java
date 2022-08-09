@@ -4,15 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.msg.learning.shop.config.OrderStrategyConfig;
 import ro.msg.learning.shop.dto.StockDTO;
-import ro.msg.learning.shop.entities.Location;
-import ro.msg.learning.shop.entities.Order;
-import ro.msg.learning.shop.entities.OrderDetail;
-import ro.msg.learning.shop.entities.Stock;
+import ro.msg.learning.shop.entities.*;
 import ro.msg.learning.shop.repositories.LocationRepository;
 import ro.msg.learning.shop.repositories.OrderDetailRepository;
 import ro.msg.learning.shop.repositories.OrderRepository;
 import ro.msg.learning.shop.repositories.StockRepository;
-import ro.msg.learning.shop.services.OrderService;
 import ro.msg.learning.shop.services.strategy.MostAbundant;
 import ro.msg.learning.shop.services.strategy.OrderStrategy;
 import ro.msg.learning.shop.services.strategy.SingleLocation;
@@ -40,6 +36,10 @@ public class OrderServiceImplemented implements OrderService{
         return new MostAbundant(stockRepository);
     }
 
+    public List<Orders> findAllOrders() {
+        return orderRepository.findAll();
+    }
+
     private void updateStock(List<StockDTO> orderStock) {
         for (StockDTO stockDTO: orderStock) {
 
@@ -58,9 +58,9 @@ public class OrderServiceImplemented implements OrderService{
         }
     }
 
-    private void createOrderDetails(List<StockDTO> orderStock, Order newOrder) {
+    private void createOrderDetails(List<StockDTO> orderStock, Orders newOrders) {
         for (StockDTO stockDTO: orderStock) {
-            OrderDetail.OrderDetailId orderDetailId = new OrderDetail.OrderDetailId(newOrder,
+            OrderDetail.OrderDetailId orderDetailId = new OrderDetail.OrderDetailId(newOrders,
                     stockDTO.getId().getProduct());
             OrderDetail orderDetail = new OrderDetail(orderDetailId, stockDTO.getQuantity());
             this.orderDetailRepository.save(orderDetail);
@@ -73,15 +73,15 @@ public class OrderServiceImplemented implements OrderService{
     }
 
     @Override
-    public Order placeOrder(Order order, List<StockDTO> orderStock) {
-        Order newOrder = this.orderRepository.save(order);
+    public Orders placeOrder(Orders orders, List<StockDTO> orderStock) {
+        Orders newOrders = this.orderRepository.save(orders);
 
         // create and save new order detail entity
-        this.createOrderDetails(orderStock, newOrder);
+        this.createOrderDetails(orderStock, newOrders);
 
         // modify stock
         this.updateStock(orderStock);
 
-        return newOrder;
+        return newOrders;
     }
 }

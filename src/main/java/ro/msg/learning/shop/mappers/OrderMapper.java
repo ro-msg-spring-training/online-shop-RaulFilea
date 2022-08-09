@@ -2,13 +2,13 @@ package ro.msg.learning.shop.mappers;
 
 import org.springframework.stereotype.Component;
 import ro.msg.learning.shop.dto.OrderDTO;
-import ro.msg.learning.shop.entities.Order;
+import ro.msg.learning.shop.entities.Orders;
 
 @Component
-public class OrderMapper implements EntityDTOMapper<Order, OrderDTO> {
+public class OrderMapper implements EntityDTOMapper<Orders, OrderDTO> {
 
     @Override
-    public OrderDTO toDTO(Order entity) {
+    public OrderDTO toDTO(Orders entity) {
         if (entity == null) {
             return null;
         }
@@ -22,12 +22,11 @@ public class OrderMapper implements EntityDTOMapper<Order, OrderDTO> {
     }
 
     @Override
-    public Order toEntity(OrderDTO dto) {
+    public Orders toEntity(OrderDTO dto) {
         if (dto == null) {
             return null;
         }
-        return Order.builder()
-//                .id(0)
+        return Orders.builder()
                 .createdAt(dto.getCreatedAt())
                 .addressCountry(dto.getAddressCountry())
                 .addressCity(dto.getAddressCity())

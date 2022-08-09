@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Getter
 @Configuration
-@ConfigurationProperties(prefix = "order")
+@ConfigurationProperties(prefix = "orders")
 public class OrderStrategyConfig {
 
-    @Value("${order.strategy}")
+    @Value("${orders.strategy}")
     private StratType strategy;
 
     public void setStrategy(String strategy) {

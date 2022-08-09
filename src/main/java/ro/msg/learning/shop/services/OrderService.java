@@ -1,9 +1,10 @@
 package ro.msg.learning.shop.services;
 
 import ro.msg.learning.shop.dto.StockDTO;
-import ro.msg.learning.shop.entities.Order;
+import ro.msg.learning.shop.entities.Orders;
+
 import java.util.List;
 
 public interface OrderService {
-    Order placeOrder(Order order, List<StockDTO> orderStock);
+    Orders placeOrder(Orders orders, List<StockDTO> orderStock);
 }

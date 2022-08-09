@@ -12,19 +12,13 @@ import java.util.List;
 @AllArgsConstructor @Builder
 public class OrderDTO {
 
-    private Integer id;
-
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+    private Long id;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt;
-
     private String addressCountry;
-
     private String addressCity;
-
     private String addressCounty;
-
     private String addressStreetAddress;
-
     private List<StockDTO> products;
 
     public static Integer getQuantityById(List<StockDTO> orderProducts, Integer productId) {
